@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+
+<div class="page-header">
+  <h1>Dashboard</h1>
+  <p>Bem-vindo(a), <strong><%= user.nome %></strong>!</p>
+</div>
+
+<div class="cards-grid">
+  <a href="/grupos" class="card card-link">
+    <div class="card-icon">📁</div>
+    <h2>Grupos de Atendimento</h2>
+    <p>Cadastre, edite e gerencie os grupos/categorias de clientes (Convênio Bronze, Particular Especial, etc.).</p>
+  </a>
+
+  <a href="/clientes" class="card card-link">
+    <div class="card-icon">👨‍👩‍👧</div>
+    <h2>Clientes / Responsáveis</h2>
+    <p>Gerencie os responsáveis pelas crianças, associe a grupos e realize buscas filtradas por nome.</p>
+  </a>
+</div>
+
+<div class="info-box">
+  <h3>Sobre o Módulo</h3>
+  <p>
+    Este é o módulo de nivelamento da Clínica Pediátrica Infantil "Pequenos Passos".
+    Ele prepara a base de clientes e grupos de atendimento para o futuro sistema completo de agendamentos médicos.
+  </p>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <h1>Grupos de Atendimento</h1>
+  <a href="/grupos/novo" class="btn btn-primary">+ Novo Grupo</a>
+</div>
+
+<% if (success) { %>
+  <div class="alert alert-success"><%= success %></div>
+<% } %>
+<% if (error) { %>
+  <div class="alert alert-error"><%= error %></div>
+<% } %>
+
+<% if (grupos.length === 0) { %>
+  <div class="empty-state">
+    <p>Nenhum grupo cadastrado ainda.</p>
+    <a href="/grupos/novo" class="btn btn-primary">Cadastrar primeiro grupo</a>
+  </div>
+<% } else { %>
+  <div class="table-wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome do Grupo</th>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% grupos.forEach(grupo => { %>
+          <tr>
+            <td><%= grupo.id %></td>
+            <td><strong><%= grupo.nome %></strong></td>
+            <td><%= grupo.descricao || '—' %></td>
+            <td class="actions">
+              <a href="/grupos/<%= grupo.id %>/editar" class="btn btn-sm btn-secondary">Editar</a>
+              <form action="/grupos/<%= grupo.id %>/excluir" method="POST" class="inline-form"
+                    onsubmit="return confirm('Tem certeza que deseja excluir o grupo <%= grupo.nome %>?');">
+                <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>

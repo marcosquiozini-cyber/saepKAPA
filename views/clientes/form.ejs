@@ -1,0 +1,62 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <h1>Novo Cliente / Responsável</h1>
+  <a href="/clientes" class="btn btn-secondary">← Voltar</a>
+</div>
+
+<% if (error) { %>
+  <div class="alert alert-error"><%= error %></div>
+<% } %>
+
+<form action="/clientes" method="POST" class="form-card">
+  <div class="form-row">
+    <div class="form-group">
+      <label for="nome_completo">Nome Completo *</label>
+      <input type="text" id="nome_completo" name="nome_completo"
+             value="<%= cliente ? cliente.nome_completo : '' %>"
+             placeholder="Nome completo do responsável" required autofocus>
+    </div>
+    <div class="form-group">
+      <label for="cpf">CPF *</label>
+      <input type="text" id="cpf" name="cpf"
+             value="<%= cliente ? cliente.cpf : '' %>"
+             placeholder="000.000.000-00" required>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email"
+             value="<%= cliente ? (cliente.email || '') : '' %>"
+             placeholder="email@exemplo.com">
+    </div>
+    <div class="form-group">
+      <label for="telefone">Telefone</label>
+      <input type="text" id="telefone" name="telefone"
+             value="<%= cliente ? (cliente.telefone || '') : '' %>"
+             placeholder="(00) 00000-0000">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="grupo_id">Grupo de Atendimento *</label>
+    <select id="grupo_id" name="grupo_id" required>
+      <option value="">— Selecione o grupo —</option>
+      <% grupos.forEach(g => { %>
+        <option value="<%= g.id %>"
+          <%= (cliente && cliente.grupo_id == g.id) ? 'selected' : '' %>>
+          <%= g.nome %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Cadastrar Cliente</button>
+    <a href="/clientes" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>
